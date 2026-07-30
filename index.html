@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kenwolf Rivera — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12141a;
+    --bg-raised:#181c24;
+    --ink:#dcd8cc;
+    --ink-dim:#8b8f9c;
+    --line:#2a2f3a;
+    --mint:#7ed9a8;
+    --amber:#e8a33d;
+    --mono:'Space Mono', monospace;
+    --sans:'Inter', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  /* ambient grid backdrop */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:48px 48px;
+    opacity:.15;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  /* ---------- header / profile ---------- */
+  header{padding:72px 0 48px;}
+  .profile{
+    display:flex;
+    gap:36px;
+    align-items:flex-start;
+    flex-wrap:wrap;
+  }
+  .avatar{
+    width:150px; height:150px;
+    flex-shrink:0;
+    border:2px solid var(--mint);
+    border-radius:6px;
+    position:relative;
+    overflow:hidden;
+  }
+  .avatar img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .avatar::before, .avatar::after{
+    content:"";
+    position:absolute; width:14px; height:14px;
+    border:2px solid var(--amber);
+  }
+  .avatar::before{top:-2px; left:-2px; border-right:none; border-bottom:none;}
+  .avatar::after{bottom:-2px; right:-2px; border-left:none; border-top:none;}
+
+  .intro{flex:1; min-width:260px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.75rem;
+    color:var(--amber);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:var(--mono);
+    font-size:2.1rem;
+    font-weight:700;
+    color:#fff;
+    line-height:1.25;
+    margin-bottom:14px;
+  }
+  h1 .accent{color:var(--mint);}
+  .bio{color:var(--ink-dim); font-size:.98rem; max-width:52ch;}
+  .bio + .bio{margin-top:8px;}
+
+  /* ---------- nav / click buttons ---------- */
+  nav.actions{
+    padding:8px 0 56px;
+  }
+  .grid-nav{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .grid-nav a{
+    grid-column:span 1;
+  }
+  .grid-nav a.wide{
+    grid-column:1 / -1;
+    justify-self:center;
+    width:60%;
+  }
+  .btn{
+    display:block;
+    text-align:center;
+    padding:14px 18px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    font-family:var(--mono);
+    font-size:.85rem;
+    letter-spacing:.04em;
+    color:var(--ink);
+    background:var(--bg-raised);
+    transition:border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .btn:hover{
+    border-color:var(--mint);
+    color:var(--mint);
+    transform:translateY(-2px);
+  }
+
+  /* ---------- section title ---------- */
+  .section-title{
+    padding-top:8px;
+    margin-bottom:6px;
+  }
+  .section-title .btn{
+    display:inline-block;
+    width:auto;
+    padding:10px 22px;
+    color:var(--amber);
+    border-color:var(--amber);
+    background:transparent;
+    cursor:default;
+  }
+  .section-title .btn:hover{transform:none;}
+  .rule{height:1px; background:var(--line); margin:22px 0;}
+  .rule.short{width:35%;}
+
+  /* ---------- project checklist ---------- */
+  .projects{padding-bottom:96px;}
+  .project{
+    display:flex;
+    gap:18px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:22px 24px;
+    margin-bottom:20px;
+    background:var(--bg-raised);
+  }
+  .checkbox{
+    flex-shrink:0;
+    width:20px; height:20px;
+    border:2px solid var(--mint);
+    border-radius:3px;
+    margin-top:3px;
+    position:relative;
+  }
+  .checkbox.done::after{
+    content:"✓";
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--mint);
+    font-size:.8rem;
+    font-family:var(--mono);
+  }
+  .project h3{
+    font-family:var(--mono);
+    font-size:1.02rem;
+    color:#fff;
+    margin-bottom:6px;
+  }
+  .project h3 .tag{
+    font-size:.68rem;
+    color:var(--bg);
+    background:var(--mint);
+    padding:2px 7px;
+    border-radius:3px;
+    margin-left:10px;
+    vertical-align:middle;
+    letter-spacing:.05em;
+  }
+  .project p{color:var(--ink-dim); font-size:.92rem;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:28px 0 60px;
+    font-family:var(--mono);
+    font-size:.75rem;
+    color:var(--ink-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  @media (max-width:560px){
+    .profile{flex-direction:column; align-items:center; text-align:center;}
+    .grid-nav a.wide{width:100%;}
+    h1{font-size:1.7rem;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="profile">
+      <div class="avatar"><img src="profile.jpg" alt="Kenwolf Rivera"></div>
+      <div class="intro">
+        <div class="eyebrow">NW-201 · Introduction to Web Development</div>
+        <h1>Kenwolf Rivera<br><span class="accent">IT Student &amp; Web Developer</span></h1>
+        <p class="bio">Computer science / IT student building small, working things — web pages, Java and Python programs, and the occasional discrete math proof turned into code.</p>
+        <p class="bio">This page is my running portfolio for the term: what I've shipped, what I'm learning, and where to reach me.</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="actions">
+    <div class="grid-nav">
+      <a class="btn" href="#about">About Me</a>
+      <a class="btn" href="#skills">Skills</a>
+      <a class="btn" href="#projects">Projects</a>
+      <a class="btn" href="#contact">Contact</a>
+      <a class="btn wide" href="#resume">Resume</a>
+    </div>
+  </nav>
+
+  <section id="projects" class="section-title">
+    <span class="btn">Featured Projects</span>
+    <div class="rule"></div>
+    <div class="rule short"></div>
+  </section>
+
+  <section class="projects">
+
+    <div class="project">
+      <div class="checkbox done"></div>
+      <div>
+        <h3>NW-201 Wireframe → Live Page <span class="tag">shipped</span></h3>
+        <p>Took a hand-drawn wireframe from paper to a responsive HTML/CSS page — profile section, navigation, and a checklist-style project list, built to match the original sketch.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="checkbox done"></div>
+      <div>
+        <h3>Discrete Math Visualizer <span class="tag">shipped</span></h3>
+        <p>Small tool for stepping through set operations and truth tables, built to make the discrete math coursework easier to check by eye.</p>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="checkbox"></div>
+      <div>
+        <h3>Java + Python Coursework Archive <span class="tag" style="background:var(--amber)">in progress</span></h3>
+        <p>Collecting the term's Java and Python assignments into one browsable, documented repo — in progress alongside this portfolio.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <span>© 2026 Kenwolf Rivera</span>
+    <span>Built for NW-201 / INTROWEB</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
